@@ -16,7 +16,7 @@ Game.prototype.winner = function() {
 		return null; 
 	}
 
-	var pairs = {
+	const PAIRS = {
 		
 		'rock': {
 			'scissors': 'blunts',
@@ -45,12 +45,12 @@ Game.prototype.winner = function() {
 		}
 	}
 
-	if(Object.keys(pairs[player1.pick]).indexOf(player2.pick) >= 0) {
-		message = player1.pick + ' ' + pairs[player1.pick][player2.pick] + ' ' + player2.pick;
+	if(Object.keys(PAIRS[player1.pick]).indexOf(player2.pick) >= 0) {
+		message = player1.pick + ' ' + PAIRS[player1.pick][player2.pick] + ' ' + player2.pick;
 		return [player1, message];
 	} 
 	else {
-		message = player2.pick + ' ' + pairs[player2.pick][player1.pick] + ' ' + player1.pick;
+		message = player2.pick + ' ' + PAIRS[player2.pick][player1.pick] + ' ' + player1.pick;
 		return [player2, message];
 	}
 }
