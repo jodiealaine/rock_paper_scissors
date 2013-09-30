@@ -1,5 +1,5 @@
-function Player (name) {
-  this.name = name;
+function Player () {
+
 }
 
 Player.prototype.picks = function (pick) {
@@ -12,18 +12,45 @@ function Game(player1, player2) {
 }
 
 Game.prototype.winner = function() {
-	if(player1.pick == player2.pick) {
-		return null;
+	if(player1.pick == player2.pick) { 
+		return null; 
 	}
 
-	var beats = new Array();
-	beats['rock'] = 'scissors';
-	beats['paper'] = 'rock';
-	beats['scissors'] = 'paper';
+	var pairs = {
+		
+		'rock': {
+			'scissors': 'blunts',
+			'lizard'  : 'crushes'
+		},
+		
+		'paper': {
+			'rock' : 'covers',
+			'spock': 'disproves'
+		},
+		
+		'scissors': {
+			'paper' : 'cuts',
+			'lizard': 'decapitates'
+		},
+		
+		'spock': {
+			'rock'    : 'vaporises',
+			'scissors': 'melts'
+		},
+		
+		'lizard': {
+			'paper': 'eats',
+			'spock': 'poisons'
+			
+		}
+	}
 
-	if(player2.pick == beats[player1.pick]) {
-		return player1;
-	} else {
-		return player2;
+	if(Object.keys(pairs[player1.pick]).indexOf(player2.pick) >= 0) {
+		message = player1.pick + ' ' + pairs[player1.pick][player2.pick] + ' ' + player2.pick;
+		return [player1, message];
+	} 
+	else {
+		message = player2.pick + ' ' + pairs[player2.pick][player1.pick] + ' ' + player1.pick;
+		return [player2, message];
 	}
 }
